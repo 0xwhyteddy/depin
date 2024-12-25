@@ -32,13 +32,13 @@ git clone https://github.com/0xwhyteddy/nodepay.git
 # Navigate to directory
 cd nodepay
 
-gras.py
+
 # Install and setup screen
 apt-get install -y screen
 
 # Start the application in a screen session
 screen -dmS Nodepay bash -c "python3 run_without_proxy.py"
 
-grass.py
+python3 grass.py
 
 echo "Installation complete. Application is running in screen session 'Nodepay'"
