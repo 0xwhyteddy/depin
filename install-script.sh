@@ -38,5 +38,7 @@ apt-get install -y screen
 
 # Start the application in a screen session
 screen -dmS Nodepay bash -c "python3 run_without_proxy.py"
-gras.py
+
+grass.py
+
 echo "Installation complete. Application is running in screen session 'Nodepay'"
