@@ -18,7 +18,13 @@ apt install python3.10 -y
 apt install python3-pip -y
 
 # Install Python packages
-pip install requests asyncio aiohttp loguru cloudscraper curl_cffi fake_useragent
+pip3 install fake_useragent
+pip3 install loguru
+pip3 install websockets_proxy
+pip3 install websockets==12.0
+pip3 install requests
+pip3 install colorama
+pip3 install aiohttp
 
 # Clone repository
 git clone https://github.com/0xwhyteddy/nodepay.git
@@ -26,10 +32,11 @@ git clone https://github.com/0xwhyteddy/nodepay.git
 # Navigate to directory
 cd nodepay
 
+gras.py
 # Install and setup screen
 apt-get install -y screen
 
 # Start the application in a screen session
 screen -dmS Nodepay bash -c "python3 run_without_proxy.py"
-
+gras.py
 echo "Installation complete. Application is running in screen session 'Nodepay'"
