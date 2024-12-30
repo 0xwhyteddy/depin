@@ -26,15 +26,6 @@ browser_id = None
 account_info = {}
 last_ping_time = {}  # Store ping times for each token
 
-def show_warning():
-    confirm = input("By using this tool means you understand the risks. do it at your own risk! \nPress Enter to continue or Ctrl+C to cancel... ")
-
-    if confirm.strip() == "":
-        print("Continuing...")
-    else:
-        print("Exiting...")
-        exit()
-
 def uuidv4():
     return str(uuid.uuid4())
     
@@ -191,6 +182,8 @@ async def process_batch(tokens_batch, batch_number, total_batches):
     logger.info(f"Finished processing batch {batch_number}")  # Log batch finished
 
 async def main():
+    print("\nStarting multi-token processing without proxies...")
+    
     while True:  # Loop to keep processing batches continuously
         try:
             with open('token_list.txt', 'r') as file:
@@ -203,24 +196,20 @@ async def main():
             print("No tokens found. Exiting.")
             return
 
-        # Ensure that we have more than 20 tokens
         total_batches = (len(tokens) // BATCH_SIZE) + (1 if len(tokens) % BATCH_SIZE > 0 else 0)
 
         logger.info(f"Total tokens: {len(tokens)}")
         logger.info(f"Total batches: {total_batches}")
 
-        # Process tokens in batches of BATCH_SIZE (20 tokens per batch)
         for i, batch in enumerate(chunkify(tokens, BATCH_SIZE)):
             batch_number = i + 1
             logger.info(f"Starting batch {batch_number} of {total_batches}, containing {len(batch)} tokens")
-            await process_batch(batch, batch_number, total_batches)  # process batch by batch
+            await process_batch(batch, batch_number, total_batches)
             logger.info(f"Finished processing batch {batch_number}")
-            await asyncio.sleep(2)  # Delay antar batch (jika perlu)
-        logger.info("Restarting batch process after completion...")  # Restart after finishing all batches
+            await asyncio.sleep(2)
+        logger.info("Restarting batch process after completion...")
 
 if __name__ == '__main__':
-    show_warning()
-    print("\nAlright, we here! The tool will now use multiple tokens without proxies.")
     try:
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
